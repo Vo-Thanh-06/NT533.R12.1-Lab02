@@ -3,6 +3,7 @@ import AuthTab from "./components/AuthTab";
 import NetworkTab from "./components/NetworkTab";
 import RouterTab from "./components/RouterTab";
 import NetworkConfigTab from "./components/NetworkConfigTab";
+import InstanceTab from "./components/InstanceTab";
 
 function App() {
     return (
@@ -25,6 +26,11 @@ function App() {
                 <hr />
 
                 <NetworkConfigTab />
+
+                <hr />
+
+                <InstanceTab />
+
             </main>
         </div>
     );
