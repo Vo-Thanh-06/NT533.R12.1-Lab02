@@ -9,6 +9,7 @@ class OpenStackClient {
         this.computeUrl = "/api-compute/v2.1";
         this.imageUrl = "/api-image/v2";
         this.networkUrl = "/api-network/v2.0";
+        this.loadBalancerUrl = "/api-loadbalancer/v2/lbaas";
     }
 
     // Xac thuc va lay Token
@@ -157,6 +158,7 @@ class OpenStackClient {
         return response.status === 204;
     }
 
+    // Liet ke Router
     async getRouters() {
         const response = await axios.get(
             `${this.networkUrl}/routers`,
@@ -166,6 +168,7 @@ class OpenStackClient {
         return response.data.routers || [];
     }
 
+    // Tao Router
     async createRouter(name) {
         const response = await axios.post(
             `${this.networkUrl}/routers`,
@@ -181,6 +184,7 @@ class OpenStackClient {
         return response.data.router;
     }
 
+    // Xoa Router
     async deleteRouter(routerId) {
         const response = await axios.delete(
             `${this.networkUrl}/routers/${routerId}`,
@@ -190,6 +194,7 @@ class OpenStackClient {
         return response.status === 204;
     }
 
+    // Lay cac Port cua Router
     async getRouterPorts(routerId) {
         const response = await axios.get(
             `${this.networkUrl}/ports`,
@@ -242,6 +247,86 @@ class OpenStackClient {
         );
 
         return response.data.security_groups || [];
+    }
+
+    // Lay danh sach Load Balancer
+    async getLoadBalancers() {
+        const response = await axios.get(
+            `${this.loadBalancerUrl}/loadbalancers`,
+            this.getAuthHeaders()
+        );
+
+        return response.data.loadbalancers || [];
+    }
+
+    // Lay thong tin Load Balancer theo ID
+    async getLoadBalancer(loadBalancerId) {
+        const response = await axios.get(
+            `${this.loadBalancerUrl}/loadbalancers/${loadBalancerId}`,
+            this.getAuthHeaders()
+        );
+
+        return response.data.loadbalancer;
+    }
+
+    // Lay danh sach Listener
+    async getListeners() {
+        const response = await axios.get(
+            `${this.loadBalancerUrl}/listeners`,
+            this.getAuthHeaders()
+        );
+
+        return response.data.listeners || [];
+    }
+
+    // Lay danh sach Pool
+    async getPools() {
+        const response = await axios.get(
+            `${this.loadBalancerUrl}/pools`,
+            this.getAuthHeaders()
+        );
+
+        return response.data.pools || [];
+    }
+
+    // Lay danh sach Web Server trong Pool
+    async getPoolMembers(poolId) {
+        const response = await axios.get(
+            `${this.loadBalancerUrl}/pools/${poolId}/members`,
+            this.getAuthHeaders()
+        );
+
+        return response.data.members || [];
+    }
+
+    // Lay danh sach Health Monitor
+    async getHealthMonitors() {
+        const response = await axios.get(
+            `${this.loadBalancerUrl}/healthmonitors`,
+            this.getAuthHeaders()
+        );
+
+        return response.data.healthmonitors || [];
+    }
+
+    // Lay chi tiet Health Monitor
+    async getHealthMonitor(healthMonitorId) {
+        const response = await axios.get(
+            `${this.loadBalancerUrl}/healthmonitors/${healthMonitorId}`,
+            this.getAuthHeaders()
+        );
+
+        return response.data.healthmonitor;
+    }
+
+    // Lay danh sach Floating IP
+    async getFloatingIps() {
+        const response = await axios.get(
+            `${this.networkUrl}/floatingips`,
+            this.getAuthHeaders()
+        );
+
+        return response.data.floatingips || [];
     }
 }
 

@@ -4,6 +4,7 @@ import NetworkTab from "./components/NetworkTab";
 import RouterTab from "./components/RouterTab";
 import NetworkConfigTab from "./components/NetworkConfigTab";
 import InstanceTab from "./components/InstanceTab";
+import LoadBalancerTab from "./components/LoadBalancerTab";
 
 function App() {
     return (
@@ -30,6 +31,10 @@ function App() {
                 <hr />
 
                 <InstanceTab />
+
+                <hr />
+
+                <LoadBalancerTab />
 
             </main>
         </div>
